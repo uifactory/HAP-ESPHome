@@ -102,8 +102,6 @@ async def to_code(config):
         for l in config["lock"]:
             lock_entity = cg.Pvariable(ID(f"{l['id'].id}_hk_lock_entity", type=LockEntity), var.add_lock(await cg.get_variable(l['id'])))
             if "nfc_id" in l:
-                cg.add_build_flag("-fexceptions")
-                cg.add_platformio_option("build_unflags", "-fno-exceptions")
                 nfc = await cg.get_variable(l["nfc_id"])
                 cg.add(var.set_nfc_ctx(nfc))
                 cg.add(var.set_hk_hw_finish(l["hk_hw_finish"]))
