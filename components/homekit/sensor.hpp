@@ -75,8 +75,9 @@ namespace esphome
           service = hap_serv_air_quality_sensor_create(sensorPtr->state);
         }
         else if (std::equal(device_class.begin(), device_class.end(), strdup("carbon_dioxide"))) {
-          service = hap_serv_carbon_dioxide_sensor_create(false);
-        }
+  service = hap_serv_create(HAP_SERV_UUID_AIR_QUALITY_SENSOR);
+  hap_serv_add_char(service, hap_char_carbon_dioxide_level_create(sensorPtr->state));
+}
         else if (std::equal(device_class.begin(), device_class.end(), strdup("carbon_monoxide"))) {
           service = hap_serv_carbon_monoxide_sensor_create(false);
         }
